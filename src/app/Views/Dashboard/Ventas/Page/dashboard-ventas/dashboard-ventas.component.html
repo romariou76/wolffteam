@@ -1,0 +1,85 @@
+<!-- <div
+      highchartsChart
+      [constructorType]="chartConstructor"
+      [options]="chartOptions"
+      [(update)]="updateFlag"
+      [oneToOne]="oneToOneFlag"
+      class="chart"
+    ></div> -->
+<section class="p-3 row row-cols-2 row-cols-md-4 row-cols-lg-3 g-3">
+  <div class="col-4">
+    <div class="card w-100 shadow-sm p-3 custom-card-white">
+      <div class="d-flex align-items-center mb-2">
+        <div>
+          <i class="bi bi-cash text-success fs-4 text-muted me-2"></i>
+        </div>
+        <span class="text-muted d-block">Ventas Totales</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <h3 class="fw-bold text-dark">
+          {{ totalCantidad() }}
+        </h3>
+        <h3 class="fw-bold text-dark">
+          {{ total() | currency : "S/ " : "symbol" : "1.2-2" }}
+        </h3>
+      </div>
+
+      <p class="mb-0">
+        <!-- <span class="text-success fw-semibold">↑ 7%</span> -->
+        <!-- <span class="text-muted">vs last 24h</span> -->
+      </p>
+    </div>
+  </div>
+
+   <div class="col-4">
+     <div class="card w-100 shadow-sm p-3 custom-card-white">
+      <div class="d-flex align-items-center mb-2">
+        <div>
+          <i class="bi bi-cash text-success fs-4 text-muted me-2"></i>
+        </div>
+        <span class="text-muted d-block">Ventas Hoy</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <h3 class="fw-bold text-dark">
+          {{ totalCantidadDia() }}
+        </h3>
+        <h3 class="fw-bold text-dark">
+          {{ totalDelDia() | currency : "S/ " : "symbol" : "1.2-2" }}
+        </h3>
+      </div>
+
+      <p class="mb-0">
+        <!-- <span class="text-success fw-semibold">↑ 7%</span> -->
+        <!-- <span class="text-muted">vs last 24h</span> -->
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="p-3 row row-cols-2 row-cols-md-4 row-cols-lg-3 g-3">
+   <div class="col-4 shadow">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Seleccionar año</mat-label>
+      <mat-select
+        [(value)]="anioSeleccionado"
+        (selectionChange)="onSeleccionarAnio($event.value)"
+      >
+        <mat-option *ngFor="let anio of anios" [value]="anio">
+          {{ anio }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <highcharts-chart
+      [options]="chartOptions"
+      style="width: 100%; height: 300px; display: block"
+    ></highcharts-chart>
+  </div>
+
+  <div class="col-4">
+    <highcharts-chart
+      [options]="chartOptionsPie"
+      style="width: 100%; height: 300px; display: block"
+    ></highcharts-chart>
+  </div>
+</section>

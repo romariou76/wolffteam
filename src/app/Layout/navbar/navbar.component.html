@@ -1,0 +1,35 @@
+<header class="header shadow">
+  <div class="container-fluid">
+    <div class="row align-items-center">
+      <div class="col-lg-5 col-md-5 col-6">
+        <div class="header-left">
+          <div class="menu-toggle-btn mr-20">
+
+            <button mat-mini-fab  (click)="toggleSidebar()" class="me-1"
+              style="color: white; background-color: rgb(17, 175, 2)">
+              <mat-icon>arrow_back_ios_new</mat-icon>
+            </button>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 col-md-7 col-6">
+        <div class="header-right">
+          <div class="profile-box ml-15">
+            <div class="dropdown2">
+              <button class="dropbtn">
+                <!-- <img class="img-profile" src="imgs/logo.jpg" alt=""> -->
+                 <i class="bi bi-person-circle me-2 fs-4"></i>
+                {{ usuario ? (usuario.nombre ? usuario.nombre.split(' ')[0] : 'Cargando...') : 'Cargando...' }}
+              </button>
+
+              <div class="dropdown-content2">
+                <a (click)="CerrarSesion()"><i class="bi bi-box-arrow-right"></i> Cerrar Sesion </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

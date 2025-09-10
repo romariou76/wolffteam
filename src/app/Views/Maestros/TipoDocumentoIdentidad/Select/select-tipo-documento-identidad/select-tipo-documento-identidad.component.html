@@ -1,0 +1,32 @@
+<mat-form-field class="w-100" appearance="outline">
+  <mat-label
+    >Tipo Documento Identidad
+    <span class="error-hint" *ngIf="!tipoDocumento || !tipoDocumento.id"
+      >(Campo requerido *)</span
+    >
+  </mat-label>
+  <input
+    type="text"
+    matInput
+    id="selecttipodocumento"
+    placeholder="buscar"
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="submitEvent($event.option.value)"
+  >
+    @for (item of listatabla(); track item) {
+    <mat-option [value]="item" (click)="submitEvent(item)">{{
+      item.descripcion
+    }}</mat-option>
+    }
+  </mat-autocomplete>
+
+  @if(!validacion()){
+  <mat-hint style="color: red">Tipo Documento no encontrado</mat-hint>
+  }
+</mat-form-field>

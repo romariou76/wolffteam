@@ -1,0 +1,47 @@
+// Importa los estilos comunes de Angular Material
+@use '@angular/material' as mat;
+
+// Importa los mixins core de Angular Material
+@include mat.core();
+
+// Define la paleta de colores
+$blue-palette: (
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #2196f3, // color primario
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+// Define el tema
+$blue-primary: mat.define-palette($blue-palette, 500);
+$blue-accent: mat.define-palette($blue-palette, A200, A100, A400);
+$blue-warn: mat.define-palette(mat.$red-palette);
+
+$blue-theme: mat.define-light-theme((
+  color: (
+    primary: $blue-primary,
+    accent: $blue-accent,
+    warn: $blue-warn,
+  )
+));
+
+// Aplica el tema a los componentes
+@include mat.all-component-themes($blue-theme);

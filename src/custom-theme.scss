@@ -1,0 +1,30 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+
+
+.mat-mdc-table{
+  background-color: rgb(255, 255, 255) !important;
+  border-radius: .5rem;
+  border: 1px solid rgb(240, 240, 240);
+}
+
+.mat-mdc-paginator-outer-container{
+  background-color: rgb(255, 255, 255) !important;
+  border-radius: .5rem;
+
+}

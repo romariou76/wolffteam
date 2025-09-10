@@ -1,0 +1,65 @@
+<div class="position-absolute top-0 end-0">
+  <img [src]="logo_letras" class="img-fluid p-5" />
+</div>
+
+<section class="d-flex vh-100 align-items-center justify-content-center">
+  <div class="background-image">
+    <img [src]="logo" class="img-fluid imagen-login" />
+  </div>
+
+  <div class="form-wrapper shadow-lg">
+    <div class="card p-4 op-75 shadow border-0">
+      <h1 class="form-title">Inicia sesión en sistema</h1>
+      <p class="text-sm mb-3 text-secondary"></p>
+      <form>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-input mb-3">
+              <label class="form-label text-dark fw-bold fs-6 mb-1"
+                >Numero Documento</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="numeroDocumento"
+                name="numeroDocumento"
+                placeholder="Ingresa tu Numero Documento"
+                [(ngModel)]="numeroDocumento"
+              />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-input mb-3">
+              <label class="mb-1 fw-bold text-dark">Contraseña</label>
+              <input
+                type="password"
+                id="clave"
+                name="clave"
+                placeholder="Ingresa tu contraseña"
+                [(ngModel)]="password"
+              />
+            </div>
+          </div>
+
+          <div class="col-12 op-100">
+            <div class="button-group d-flex justify-content-center flex-wrap">
+              <button
+                [disabled]="numeroDocumento().trim() === '' || password().trim() === '' || isSending()"
+                class="btn btn-success my-3 w-100 text-center"
+                (click)="clickLogin()"
+              >
+              <div class="d-flex justify-content-center">
+                <mat-spinner *ngIf="isSending()" class="me-1" diameter="20" [strokeWidth]="3"></mat-spinner>
+                <span *ngIf="!isSending()">Ingresar</span>
+                <span *ngIf="isSending()">Cargando...</span>
+              </div>
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="form-footer"></div>
+    </div>
+  </div>
+</section>

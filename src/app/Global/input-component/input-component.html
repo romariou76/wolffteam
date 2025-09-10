@@ -1,0 +1,27 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label
+    >{{label()}} @if(!validacion()){<span style="color: red"
+      >(Campo requerido *)</span
+    >
+    }
+  </mat-label>
+  <input
+    matInput
+    [type]="tipo()"
+    [placeholder]="placeholder()"
+    [(ngModel)]="value"
+    [id]="idinput()"
+    [readonly]="leersolamente()"
+  />
+
+  @if(botonactivo()){
+  <button
+    matSuffix
+    mat-icon-button
+    (click)="eventoboton.emit()"
+    matTooltip="{{tooltipbutton()}}"
+  >
+    <mat-icon>{{iconoboton()}}</mat-icon>
+  </button>
+  }
+</mat-form-field>

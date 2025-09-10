@@ -1,0 +1,15 @@
+.inscripcion-card {
+  max-width: 300px;
+  margin: 10px;
+  text-align: left;
+}
+
+.avatar-placeholder {
+  background-color: #e0e0e0;
+  border-radius: 50%;
+}
+
+.estado-cancelado {
+  color: #e53935;
+  font-weight: bold;
+}

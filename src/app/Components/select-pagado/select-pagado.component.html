@@ -1,0 +1,28 @@
+<mat-form-field class="w-100" appearance="outline">
+  <mat-label
+    >Pagado
+
+  </mat-label>
+  <input
+    type="text"
+    matInput
+    id="selectpagado"
+    placeholder="buscar"
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="submitEvent($event.option.value)"
+  >
+    @for (item of listatabla(); track item) {
+    <mat-option [value]="item" (click)="submitEvent(item)">{{
+      item.descripcion
+    }}</mat-option>
+    }
+  </mat-autocomplete>
+
+
+</mat-form-field>

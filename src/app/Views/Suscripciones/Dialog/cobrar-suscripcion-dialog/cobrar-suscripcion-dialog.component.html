@@ -1,0 +1,71 @@
+<h1 mat-dialog-title>Cobrar Inscripcion N° {{suscripcion().id}}</h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+
+      <!-- <mat-form-field class="col-6">
+        <mat-label>Cliente</mat-label>
+        <input matInput type="text" [value]="suscripcion().cliente"/>
+      </mat-form-field> -->
+
+      <mat-form-field class="col-6">
+        <mat-label>Monto a Pagar</mat-label>
+        <input matInput type="text" formControlName="monto"
+          (input)="isMontoValid()"
+         (keydown.enter)="moveFocus('fechaPago')"
+        />
+        <mat-error *ngIf="formulario.get('monto')?.hasError('required')">
+          Este campo es requerido
+        </mat-error>
+          @if(!isValidMonto()){
+          <mat-error >
+            El monto debe ser menor que el saldo
+          </mat-error>
+        }
+
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Fecha de pago</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaPago"
+        id="fechaPago"
+        (keydown.enter)="moveFocus('selectformapago')"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="col-6">
+        <app-select-forma-pago (event)="eventFormaPago($event)"
+        (keydown.enter)="moveFocus('observaciones')"
+        ></app-select-forma-pago>
+      </div>
+
+      <mat-form-field class="col-6">
+        <mat-label>Observaciones</mat-label>
+        <input matInput type="text" formControlName="observaciones"
+        id="observaciones"
+        (keydown.enter)="quitarFocus()"
+        />
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button
+      [disabled]="!formulario.valid || isSending()"
+
+      type="submit">
+      <div class="d-flex">
+        <mat-spinner *ngIf="isSending()" class="me-1" diameter="20" [strokeWidth]="3"></mat-spinner>
+          <span *ngIf="!isSending()">Aceptar</span>
+          <span *ngIf="isSending()">Guardando...</span>
+      </div>
+      </button>
+    </div>
+  </mat-dialog-actions>
+
+</form>

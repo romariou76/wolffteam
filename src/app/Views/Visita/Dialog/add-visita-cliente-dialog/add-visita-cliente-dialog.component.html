@@ -1,0 +1,107 @@
+<h1 mat-dialog-title class="fw-bold">Registrar Ingreso Ocasional</h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-10">
+            @if(mostrarSelect()){
+
+            <app-select-cliente
+              [value]="idCliente()"
+              (event)="eventCliente($event)"
+              (keydown.enter)="moveFocus('selectplan')"
+            ></app-select-cliente>
+            }
+          </div>
+          <div class="col-2">
+            <button
+              type="button"
+              mat-fab
+              (click)="clickAddClienteDialog()"
+              class="bg-primary text-white"
+              matTooltip="Registrar Nuevo Cliente"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <!-- <app-select-cliente
+          (event)="eventCliente($event)"
+          (keydown.enter)="moveFocus('')"
+        ></app-select-cliente> -->
+      </div>
+
+      <mat-form-field class="col-6">
+        <mat-label>Fecha</mat-label>
+        <input
+          matInput
+          [matDatepicker]="inicioPicker"
+          formControlName="fecha"
+          id="fecha"
+          (keydown.enter)="moveFocus('costo')"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="inicioPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+        <mat-error *ngIf="formulario.get('fecha')?.hasError('required')">
+          La fecha de inicio es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Costo</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="costo"
+          id="costo"
+          (keydown.enter)="moveFocus('selectformapago')"
+        />
+        <mat-error *ngIf="formulario.get('costo')?.hasError('required')">
+          El total es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="col-6">
+        <mat-label>Diario / Mensual </mat-label>
+        <input matInput type="text" formControlName="concepto" />
+      </mat-form-field> -->
+
+      <div class="col-6">
+        <app-select-forma-pago
+          (event)="eventFormaPago($event)"
+          (keydown.enter)="moveFocus('observaciones')"
+        >
+        </app-select-forma-pago>
+      </div>
+
+      <mat-form-field class="col-12">
+        <mat-label>Observaciones</mat-label>
+        <textarea
+          matInput
+          rows="1"
+          formControlName="observaciones"
+          (keydown.enter)="quitarFocus()"
+          id="observaciones"
+        ></textarea>
+      </mat-form-field>
+
+      <!-- <div class="col-6 d-flex align-items-center">
+    <mat-label>¿Activo?</mat-label>
+    <mat-slide-toggle formControlName="activo"></mat-slide-toggle>
+  </div> -->
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button [disabled]="!formulario.valid" type="submit">
+        Registrar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

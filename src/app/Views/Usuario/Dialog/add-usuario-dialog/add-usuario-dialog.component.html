@@ -1,0 +1,92 @@
+<h1 mat-dialog-title class="fw-bold">Agregar Usuario</h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" formControlName="nombre" />
+        <mat-error *ngIf="formulario.get('nombre')?.hasError('required')">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" formControlName="apellidos" />
+        <mat-error *ngIf="formulario.get('apellidos')?.hasError('required')">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+    <mat-form-field class="col-6">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="text" formControlName="telefono" />
+        <mat-error *ngIf="formulario.get('telefono')?.hasError('required')">
+          El teléfono es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" formControlName="correo" />
+        <mat-error *ngIf="formulario.get('correo')?.hasError('required')">
+          El correo es requerido
+        </mat-error>
+        <mat-error *ngIf="formulario.get('correo')?.hasError('email')">
+          Formato de correo inválido
+        </mat-error>
+      </mat-form-field>
+
+          <mat-form-field class="col-6">
+        <mat-label>Dirección</mat-label>
+        <input matInput type="text" formControlName="direccion" />
+        <mat-error *ngIf="formulario.get('direccion')?.hasError('required')">
+          La dirección es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Número de documento</mat-label>
+        <input matInput type="text" formControlName="numeroDocumento" />
+        <mat-error
+          *ngIf="formulario.get('numeroDocumento')?.hasError('required')"
+        >
+          El número de documento es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-6">
+        <app-select-tipo-documento-identidad
+          (event)="eventTipoDocumento($event)"
+        ></app-select-tipo-documento-identidad>
+      </div>
+
+      <div class="col-6">
+        <app-select-cargo (event)="eventCargo($event)"></app-select-cargo>
+      </div>
+
+      <mat-form-field class="col-6">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="formulario.get('password')?.hasError('required')">
+          La clave es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-6 d-flex align-items-center">
+        <mat-label>¿Activo?</mat-label>
+        <mat-slide-toggle formControlName="activo"></mat-slide-toggle>
+      </div>
+
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button [disabled]="!formulario.valid" type="submit">
+        Guardar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

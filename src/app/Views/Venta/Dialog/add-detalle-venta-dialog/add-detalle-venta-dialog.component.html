@@ -1,0 +1,82 @@
+<h1 mat-dialog-title>Agregar Detalle</h1>
+<form [formGroup]="formulario" >
+  <div mat-dialog-content>
+    <div class="row mt-2">
+      <app-select-producto
+        (event)="eventProducto($event)"
+        (keydown.enter)="moveFocus('cantidad')"
+      ></app-select-producto>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Cantidad</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="cantidad"
+            id="cantidad"
+            (input)="calculoTotal()"
+            (keydown.enter)="moveFocus('precioUnitario')"
+          />
+          <mat-error *ngIf="formulario.get('cantidad')?.hasError('required')">
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Precio Unitario</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="precioUnitario"
+            id="precioUnitario"
+            (input)="calculoTotal()"
+            (keydown.enter)="quitarFocus()"
+            />
+          <mat-error
+            *ngIf="formulario.get('precioUnitario')?.hasError('required')"
+          >
+            Este campo es requerido
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Precio Total</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="precioTotal"
+            id="precioTotal"
+            readonly="true"
+            />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button
+        mat-flat-button
+        mat-dialog-close
+        type="button"
+      style="background: #6c757d;">Cerrar
+      </button>
+      <button
+        mat-flat-button
+        [disabled]="!formulario.valid"
+        type="submit"
+        (click)="clicEnviar()"
+        color="primary"
+      >
+        Agregar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

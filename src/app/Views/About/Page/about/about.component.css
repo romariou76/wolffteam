@@ -1,0 +1,13 @@
+.card-sistema {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 16px;
+}
+
+.my-4 {
+  margin: 24px 0;
+}
+
+.detalle p {
+  margin: 6px 0;
+}

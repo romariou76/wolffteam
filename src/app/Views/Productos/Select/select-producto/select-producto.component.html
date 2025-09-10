@@ -1,0 +1,31 @@
+<mat-form-field class="w-100" appearance="outline">
+  <mat-label
+    >Producto
+    <span class="error-hint" *ngIf="!producto || !producto.id"
+      >(Campo requerido *)</span
+    >
+  </mat-label>
+  <input
+    type="text"
+    matInput
+    id="selectcliente"
+    placeholder="buscar"
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete
+    autoActiveFirstOption
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="submitEvent($event.option.value)"
+  >
+    @for (item of listatabla(); track item) {
+    <mat-option [value]="item" (click)="submitEvent(item)">
+      {{ item.nombre + ' ' + item.nombre }}</mat-option>
+    }
+  </mat-autocomplete>
+
+  @if(!validacion()){
+  <mat-hint style="color: red">Producto no encontrado</mat-hint>
+  }
+</mat-form-field>

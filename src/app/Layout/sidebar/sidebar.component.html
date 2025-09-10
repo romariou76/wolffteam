@@ -1,0 +1,264 @@
+<aside class="sidebar-nav-wrapper" [class]="toggleSidebarService.clasesidebar">
+  <div class="px-3 mt-3">
+    <a>
+      <img src="imgs/logo.png" width="200" alt="logo" />
+    </a>
+  </div>
+  <button
+    class="btn bi bi-x-lg d-block fs-2 d-xl-none"
+    style="position: absolute; top: 0; right: 0; padding: 10px 10px 0px 0px"
+    (click)="toggleSidebar()"
+  ></button>
+  <nav class="sidebar-nav">
+    <ul>
+      <span class="divider">
+        <hr />
+      </span>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'asistencia' }"
+          (click)="toggleOption('asistencia')"
+          id="asistencia"
+        >
+          <span class="icon"><i class="bi bi-door-open"></i></span>
+          <span class="text">Ingresos</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'inscripciones' }"
+          (click)="toggleOption('inscripciones')"
+          id="inscripciones"
+        >
+          <span class="icon"><i class="bi bi-clipboard2-plus"></i></span>
+          <span class="text">Inscripciones</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'ventas' }"
+          (click)="toggleOption('ventas')"
+          id="ventas"
+        >
+          <span class="icon">
+            <i class="bi bi-cart2"></i>
+          </span>
+          <span class="text">Ventas</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'clientes' }"
+          (click)="toggleOption('clientes')"
+          id="clientes"
+        >
+          <span class="icon">
+            <i class="bi bi-people"></i>
+          </span>
+          <span class="text">Clientes</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'planes' }"
+          (click)="toggleOption('planes')"
+          id="planes"
+        >
+          <span class="icon">
+            <i class="bi bi-bookmark-star"></i>
+          </span>
+          <span class="text">Planes</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'productos' }"
+          [routerLink]="['productos']"
+          (click)="toggleOption('productos')"
+          id="productos"
+        >
+          <span class="icon">
+            <i class="bi bi-box-seam"></i>
+          </span>
+          <span class="text">Productos</span>
+        </a>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'pagos' }"
+          (click)="toggleOption('pagos')"
+          id="pagos"
+        >
+          <span class="icon">
+            <i class="bi bi-cash-coin"></i>
+          </span>
+          <span class="text">Pagos</span>
+        </a>
+      </li>
+
+      @if(this.authorization.isAdmin()){
+
+      <li class="nav-item nav-item-has-children">
+        <a
+        [ngClass]="{ 'collapsed': clase() !== 'usuarios' }"
+        (click)="toggleOption('usuarios')"
+        id="usuarios"
+          >
+          <span class="icon">
+            <i class="bi bi-person-vcard"></i>
+          </span>
+          <span class="text">Usuarios</span>
+        </a>
+      </li>
+
+      } @if(this.authorization.isAdmin()){
+
+      <span class="divider">
+        <hr />
+      </span>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_55"
+          aria-controls="ddmenu_55"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="toggleOption('ddmenu_55')"
+        >
+          <span class="icon">
+            <i class="bi bi-people"></i>
+          </span>
+          <span class="text">Configuración</span>
+          <i class="icon-li bi bi-chevron-right"></i>
+        </a>
+        <ul id="ddmenu_55" class="collapse dropdown-nav">
+          <li>
+            <a [routerLink]="['maestros/forma-pago']"> Forma Pago </a>
+          </li>
+          <li>
+            <a [routerLink]="['maestros/tipo-documento-identidad']">
+              Tipo Documento Identidad
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['maestros/cargo']"> Cargo </a>
+          </li>
+          <li>
+            <a (click)="clickOpenPrecioIngreso()"> Precio Ingreso </a>
+          </li>
+        </ul>
+      </li>
+
+      } @else { }
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_personal"
+          aria-controls="ddmenu_personal"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="toggleOption('ddmenu_personal')"
+        >
+          <span class="icon">
+            <i class="bi bi-receipt"></i>
+          </span>
+          <span class="text"> Dashboards </span>
+          <i class="icon-li bi bi-chevron-right"></i>
+        </a>
+        <ul id="ddmenu_personal" class="collapse dropdown-nav">
+          <li>
+            <a [routerLink]="['dashboard/pagos']">Pagos </a>
+          </li>
+            <li>
+            <a [routerLink]="['dashboard/ventas']">Ventas </a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_reportes"
+          aria-controls="ddmenu_reportes"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="toggleOption('ddmenu_reportes')"
+        >
+          <span class="icon">
+            <i class="bi bi-receipt"></i>
+          </span>
+          <span class="text">Reportes </span>
+          <i class="icon-li bi bi-chevron-right"></i>
+        </a>
+        <ul id="ddmenu_reportes" class="collapse dropdown-nav">
+          <li>
+            <a [routerLink]="['reporte/ventas']">Reporte Ventas </a>
+          </li>
+          <li>
+            <a [routerLink]="['reporte/inscripciones']">Reporte Inscripciones </a>
+          </li>
+          <li>
+            <a [routerLink]="['reporte/pagos']">Reporte Pagos </a>
+          </li>
+        </ul>
+      </li>
+
+      <span class="divider">
+        <hr />
+      </span>
+      <li class="nav-item nav-item-has-children">
+        <a
+          (click)="CerrarSesion()"
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_3"
+          aria-controls="ddmenu_3"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="icon">
+            <i class="bi bi-box-arrow-right"></i>
+          </span>
+          <span class="text">Cerrar Sesion</span>
+        </a>
+        <ul id="ddmenu_3" class="collapse dropdown-nav"></ul>
+      </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_5"
+          aria-controls="ddmenu_5"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="icon">
+            <i class="bi bi-info-circle"></i>
+          </span>
+          <span class="text"> Información </span>
+          <i class="icon-li bi bi-chevron-right"></i>
+        </a>
+        <ul id="ddmenu_5" class="collapse dropdown-nav">
+          <li>
+            <a [routerLink]="['about']"> Acerca del software </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</aside>

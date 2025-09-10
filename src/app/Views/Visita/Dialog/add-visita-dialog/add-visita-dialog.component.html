@@ -1,0 +1,91 @@
+<h1 mat-dialog-title class="fw-bold">Registrar Ingreso </h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+
+        <h6 >Datos del Cliente</h6>
+        <div class="col-7">
+          <app-select-cliente
+            (event)="eventCliente($event)"
+            (keydown.enter)="moveFocus('')"
+          ></app-select-cliente>
+        </div>
+
+        <mat-form-field class="col-5">
+          <mat-label>Fecha</mat-label>
+          <input
+            matInput
+            [matDatepicker]="inicioPicker"
+            formControlName="fecha"
+            id="fecha"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="inicioPicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #inicioPicker></mat-datepicker>
+          <mat-error *ngIf="formulario.get('fecha')?.hasError('required')">
+            La fecha de inicio es requerida
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <mat-label>Observaciones</mat-label>
+          <textarea
+            matInput
+            rows="3"
+            formControlName="observaciones"
+            id="observaciones"
+          ></textarea>
+        </mat-form-field>
+           </div>
+      </div>
+
+      <div class="col-4">
+        @if(inscripcion.id){
+        <h6 >Datos de la Inscripción</h6>
+        <mat-card class="inscripcion-card">
+          <mat-card-header>
+
+            <!-- <mat-card-title>JR8C2024</mat-card-title> -->
+            <mat-card-subtitle class="text-success">
+              {{inscripcion.estado}}
+            </mat-card-subtitle>
+
+          </mat-card-header>
+
+          <mat-card-content>
+            <p><strong>{{inscripcion.cliente}}</strong></p>
+            <p>Plan: {{inscripcion.plan}}</p>
+            <p>Inicio: {{inscripcion.fechaInicio | date: "dd/MM/yyyy"}}</p>
+            <p>Fin: {{inscripcion.fechaFin | date: "dd/MM/yyyy"}}</p>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <!-- <button mat-raised-button color="primary">REGISTRAR VISITA</button> -->
+          </mat-card-actions>
+        </mat-card>
+        }
+
+
+
+      </div>
+
+      <!-- <div class="col-6 d-flex align-items-center">
+    <mat-label>¿Activo?</mat-label>
+    <mat-slide-toggle formControlName="activo"></mat-slide-toggle>
+  </div> -->
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button [disabled]="!formulario.valid" type="submit">
+        Registrar
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

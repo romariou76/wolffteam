@@ -1,0 +1,78 @@
+<section class="p-3">
+  <aside class="d-flex align-items-center mb-3">
+    <span class="me-2 fs-2 fw-bold"> Registro de Ingresos </span>
+    <!-- <img src="Icons/excavador.png" alt="icono"> -->
+  </aside>
+
+  <div class="d-flex justify-content-between table-responsive">
+
+    <div class="d-flex gap-3">
+    </div>
+
+    <div class="ms-3 mb-3">
+
+      <button type="button" mat-fab extended (click)="clickAdd()" class=" text-white me-2"  style="background-color: #1f9225 !important;"
+      matTooltip="Registrar ingreso de clientes inscritos">
+        <mat-icon>add</mat-icon>
+        Registrar Ingreso
+      </button>
+       <button type="button" mat-fab extended (click)="clickAddVisitaCliente()" class="bg-primary text-white" style="background-color: #a02cec !important;"
+       matTooltip="Registrar ingreso de clientes no inscritos">
+        <mat-icon>add</mat-icon>
+        Registrar Ingreso Ocasional
+      </button>
+    </div>
+  </div>
+
+
+<div class="table-responsive">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>N!</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cliente">
+      <th mat-header-cell *matHeaderCellDef>cliente</th>
+      <td mat-cell *matCellDef="let element">{{ element.cliente }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="inscripcion">
+      <th mat-header-cell *matHeaderCellDef>Inscripcion</th>
+      <td mat-cell *matCellDef="let element">{{ element.inscripcion }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef>Tipo</th>
+      <td mat-cell *matCellDef="let element">{{ element.tipo }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let element">{{ element.fecha | date: "dd/MM/yyyy"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+         <button mat-mini-fab matTooltip="Ver detalles" (click)="clickViewDetalleVisita(element)" class="me-1"
+            style="color: white; background-color: #3f51b5"
+            >
+            <mat-icon>visibility</mat-icon>
+          </button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+
+</section>
+
+

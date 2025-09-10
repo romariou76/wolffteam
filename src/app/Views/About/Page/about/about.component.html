@@ -1,0 +1,20 @@
+<mat-card class="card-sistema">
+  <mat-card-header>
+    <mat-card-title>📘 Acerca del Sistema</mat-card-title>
+
+    <mat-card-subtitle class="mt-3">{{ sistema.nombre }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>📝 {{ sistema.descripcion }}</p>
+
+    <mat-divider class="my-4"></mat-divider>
+
+    <div class="detalle">
+      <p>🔢 <strong>Versión:</strong> {{ sistema.version }}</p>
+      <p>📅 <strong>Fecha de despliegue:</strong> {{ sistema.fechaDespliegue }}</p>
+      <p>🛠️ <strong>Desarrollado por:</strong> {{ sistema.desarrolladoPor }}</p>
+      <p>📨 <strong>Contacto técnico:</strong> {{ sistema.contacto }}</p>
+    </div>
+  </mat-card-content>
+</mat-card>

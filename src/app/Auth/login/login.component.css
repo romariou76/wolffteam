@@ -1,0 +1,66 @@
+.form-wrapper {
+  width: 500px;
+  transition: ease-in 0.5s;
+}
+
+@media (max-width: 600px) {
+  .form-wrapper {
+    width: 400px;
+    margin: 0rem 1rem;
+  }
+}
+
+.card{
+  background-color: #ffffff;
+}
+
+.op-100{
+  opacity: 1 !important;
+}
+
+.op-75{
+  opacity: .75;
+}
+
+.op-50{
+  opacity: .50;
+}
+
+.op-25{
+  opacity: .25;
+}
+
+.form-title {
+  font: 600 1.25rem/1.25rem sans-serif;
+  color: #262d3f;
+}
+
+.form-input input {
+  width: 100%;
+  background: rgb(239, 239, 239);
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  padding: 16px;
+  color: #5d657b;
+  transition: all 0.3s;
+}
+
+.form-input input:focus {
+  border-color: #4a6cf7;
+  background: #fff;
+}
+
+.text-sm, .form-footer p {
+  font: 13px/22px sans-serif;
+}
+
+.background-image {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+}
+
+.imagen-login{
+  width: 45rem;
+  opacity: .2;
+}

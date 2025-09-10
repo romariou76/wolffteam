@@ -1,0 +1,130 @@
+<h1 mat-dialog-title class="fw-bold">Registrar Cliente</h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+
+
+
+
+      <div class="col-6">
+        <app-select-tipo-documento-identidad (event)="eventTipoDocumento($event)"
+        (keydown.enter)="moveFocus('numeroDocumento')"
+        ></app-select-tipo-documento-identidad>
+      </div>
+
+  <mat-form-field class="col-6">
+        <mat-label>Número de documento</mat-label>
+        <input matInput type="text" formControlName="numeroDocumento"
+            id="numeroDocumento"
+           (keydown.enter)="getNombreByDni()"
+           [disabled]="isLoadingDni()"
+           [readonly]="isLoadingDni()"
+         />
+           <button mat-icon-button matSuffix disabled *ngIf="isLoadingDni()">
+            <mat-progress-spinner
+              mode="indeterminate"
+              diameter="20"
+              strokeWidth="3"
+              [style.marginTop.px]="4">
+            </mat-progress-spinner>
+          </button>
+        <mat-error *ngIf="formulario.get('numeroDocumento')?.hasError('required')">
+          El número de documento es requerido
+        </mat-error>
+      </mat-form-field>
+<!--
+<mat-form-field appearance="outline">
+  <mat-label>Buscar cliente</mat-label>
+  <input matInput placeholder="DNI o nombre" [disabled]="isLoadingDni()">
+  <button mat-icon-button matSuffix disabled *ngIf="isLoadingDni()">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="20"
+      strokeWidth="3"
+      [style.marginTop.px]="4">
+    </mat-progress-spinner>
+  </button>
+</mat-form-field> -->
+
+
+      <mat-form-field class="col-6">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" formControlName="nombre"
+          id="nombre"
+         (keydown.enter)="moveFocus('apellidos')"
+        />
+        <mat-error *ngIf="formulario.get('nombre')?.hasError('required')">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Apellidos</mat-label>
+        <input matInput type="text" formControlName="apellidos"
+          id="apellidos"
+         (keydown.enter)="moveFocus('telefono')"/>
+        <mat-error *ngIf="formulario.get('apellidos')?.hasError('required')">
+          Este campo es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="text" formControlName="telefono"
+          id="telefono"
+         (keydown.enter)="moveFocus('selectgenero')"
+        />
+        <mat-error *ngIf="formulario.get('telefono')?.hasError('required')">
+          El teléfono es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="col-6">
+        <mat-label>Correo</mat-label>
+        <input matInput type="email" formControlName="correo"
+          id="correo"
+
+         (keydown.enter)="moveFocus('direccion')"/>
+        <mat-error *ngIf="formulario.get('correo')?.hasError('required')">
+          El correo es requerido
+        </mat-error>
+
+      </mat-form-field> -->
+
+      <!-- <mat-form-field class="col-6">
+        <mat-label>Dirección</mat-label>
+        <input matInput type="text" formControlName="direccion"
+          id="direccion"
+
+         (keydown.enter)="moveFocus('selectgenero')"
+        />
+        <mat-error *ngIf="formulario.get('direccion')?.hasError('required')">
+          La dirección es requerida
+        </mat-error>
+      </mat-form-field> -->
+
+
+
+      <div class="col-6">
+        <app-select-genero (event)="eventGenero($event)"></app-select-genero>
+      </div>
+
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button
+      [disabled]="!formulario.valid || isSending()"
+
+      type="submit">
+      <div class="d-flex">
+        <mat-spinner *ngIf="isSending()" class="me-1" diameter="20" [strokeWidth]="3"></mat-spinner>
+          <span *ngIf="!isSending()">Guardar</span>
+          <span *ngIf="isSending()">Guardando...</span>
+      </div>
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,167 @@
+<div class="d-flex"><h1 mat-dialog-title class="sub-header-title">Detalle Suscripcion N° {{suscripcion.id}}</h1>
+
+</div>
+<div mat-dialog-content>
+  <div class="row">
+
+    <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Cliente</mat-label>
+        <input matInput [value]="suscripcion.cliente" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Plan</mat-label>
+        <input matInput  [value]="suscripcion.plan" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+
+      <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput  [value]="suscripcion.fechaInicio | date: 'dd/MM/yyyy'" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+
+     <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput  [value]="suscripcion.fechaFin | date: 'dd/MM/yyyy'" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+
+
+    <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Total</mat-label>
+        <input matInput [value]="suscripcion.total" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+      <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Total Pagado</mat-label>
+        <input matInput [value]="suscripcion.totalPagado" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+  <div class="col-md-3">
+    <mat-form-field class="w-100" appearance="outline">
+      <mat-label>Cliente</mat-label>
+      <input matInput [value]="suscripcion.cliente" [readonly]="true" />
+    </mat-form-field>
+  </div>
+
+
+    <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input matInput [value]="suscripcion.estado" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+        <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Registrado Por</mat-label>
+        <input matInput [value]="suscripcion.creadoPor" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-3">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Observaciones</mat-label>
+        <input matInput [value]="suscripcion.observaciones" [readonly]="true" />
+      </mat-form-field>
+    </div>
+
+  </div>
+
+<!-- <mat-divider></mat-divider> -->
+<h5 class="mt-3">Lista de Pagos</h5>
+
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Numero</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef>Concepto</th>
+        <td mat-cell *matCellDef="let element">{{ element.tipoMovimientoAsociado }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>Fecha Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaPago | date: "dd/MM/yyyy"}}</td>
+        <td mat-footer-cell *matFooterCellDef class="fw-bold">TOTAL: </td>
+      </ng-container>
+
+      <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef class="text-end">Monto</th>
+        <td mat-cell *matCellDef="let element" class="text-end">{{ element.monto | currency : "S/ " : "symbol" : "1.2-2"
+          }}</td>
+        <td mat-footer-cell *matFooterCellDef class="text-end fw-bold">{{total() | currency : "S/ " : "symbol" :
+          "1.2-2"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="formapago">
+        <th mat-header-cell *matHeaderCellDef>Forma De Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.formaDePago }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="observaciones">
+        <th mat-header-cell *matHeaderCellDef>Observaciones</th>
+        <td mat-cell *matCellDef="let element">{{ element.observaciones }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="registradopor">
+        <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+        <td mat-cell *matCellDef="let element">{{ element.registradoPor }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+
+      </td>
+    </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+
+  </div>
+
+</div>
+
+<mat-dialog-actions class="position-relative">
+  <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+    <button
+      mat-flat-button
+      mat-dialog-close
+     style="background: #6c757d;">
+      Cerrar
+    </button>
+
+  </div>
+</mat-dialog-actions>

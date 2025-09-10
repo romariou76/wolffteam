@@ -1,0 +1,131 @@
+<h1 mat-dialog-title class="fw-bold">Editar Inscripción</h1>
+<form [formGroup]="formulario" (ngSubmit)="clicEnviar()">
+  <div mat-dialog-content>
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>Fecha de Registro</mat-label>
+        <input
+          matInput
+          [matDatepicker]="registroPicker"
+          formControlName="fechaRegistro"
+          id="fechaRegistro"
+          (keydown.enter)="moveFocus('selectcliente')"
+        readonly="true"
+        />
+        <!-- <mat-datepicker-toggle
+          matSuffix
+          [for]="registroPicker"
+        ></mat-datepicker-toggle> -->
+        <mat-datepicker #registroPicker></mat-datepicker>
+        <mat-error
+          *ngIf="formulario.get('fechaRegistro')?.hasError('required')"
+        >
+          La fecha es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <div class="col-6">
+          <app-input-component
+            [label]="'Cliente'"
+            [tipo]="'text'"
+            [leersolamente]="true"
+            [value]="cliente()"
+          >
+          </app-input-component>
+      </div>
+
+      <div class="col-6">
+        <app-select-plan
+          (event)="eventPlan($event)"
+          (keydown.enter)="moveFocus('total')"
+          [(value2)]="idPlan"
+
+        ></app-select-plan>
+      </div>
+
+      <mat-form-field class="col-6">
+        <mat-label>Total</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="total"
+          id="total"
+          (keydown.enter)="moveFocus('fechaInicio')"
+        />
+        <mat-error *ngIf="formulario.get('total')?.hasError('required')">
+          El total es requerido
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Fecha de Inscripción</mat-label>
+        <input
+          matInput
+          [matDatepicker]="inicioPicker"
+          formControlName="fechaInicio"
+          id="fechaInicio"
+          (keydown.enter)="moveFocus('observaciones')"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="inicioPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #inicioPicker></mat-datepicker>
+        <mat-error *ngIf="formulario.get('fechaInicio')?.hasError('required')">
+          La fecha de inicio es requerida
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-6">
+        <mat-label>Fecha de Culminación</mat-label>
+        <input
+          matInput
+          [matDatepicker]="finPicker"
+          formControlName="fechaFin"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="finPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #finPicker></mat-datepicker>
+        <mat-error *ngIf="formulario.get('fechaFin')?.hasError('required')">
+          La fecha de fin es requerida
+        </mat-error>
+      </mat-form-field>
+
+
+    <mat-form-field class="col-6">
+        <mat-label>Observaciones</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="observaciones"
+          id="observaciones"
+        />
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button
+        mat-flat-button
+        [disabled]="!formulario.valid || isSending()"
+        type="submit"
+      >
+        <div class="d-flex">
+          <mat-spinner
+            *ngIf="isSending()"
+            class="me-1"
+            diameter="20"
+            [strokeWidth]="3"
+          ></mat-spinner>
+          <span *ngIf="!isSending()">Aceptar</span>
+          <span *ngIf="isSending()">Guardando...</span>
+        </div>
+      </button>
+    </div>
+  </mat-dialog-actions>
+</form>

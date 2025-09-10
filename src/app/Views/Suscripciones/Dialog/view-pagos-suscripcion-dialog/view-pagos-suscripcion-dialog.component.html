@@ -1,0 +1,75 @@
+<section class="p-3">
+  <aside class="d-flex align-items-center mb-3">
+    <span class="me-2 fs-2 fw-bold text-dark"> Pagos </span>
+    <!-- <img src="Icons/excavador.png" alt="icono"> -->
+  </aside>
+
+  <div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Numero</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef>Concepto</th>
+        <td mat-cell *matCellDef="let element">{{ element.tipoMovimientoAsociado }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef>Fecha Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaPago | date: "dd/MM/yyyy"}}</td>
+        <td mat-footer-cell *matFooterCellDef class="fw-bold">TOTAL: </td>
+      </ng-container>
+
+      <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef class="text-end">Monto</th>
+        <td mat-cell *matCellDef="let element" class="text-end">{{ element.monto | currency : "S/ " : "symbol" : "1.2-2"
+          }}</td>
+        <td mat-footer-cell *matFooterCellDef class="text-end fw-bold">{{total() | currency : "S/ " : "symbol" :
+          "1.2-2"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="formapago">
+        <th mat-header-cell *matHeaderCellDef>Forma De Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.formaDePago }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="observaciones">
+        <th mat-header-cell *matHeaderCellDef>Observaciones</th>
+        <td mat-cell *matCellDef="let element">{{ element.observaciones }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="registradopor">
+        <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+        <td mat-cell *matCellDef="let element">{{ element.registradoPor }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+
+      </td>
+    </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+
+  </div>
+</section>

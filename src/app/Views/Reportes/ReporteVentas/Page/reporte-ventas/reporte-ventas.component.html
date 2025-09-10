@@ -1,0 +1,148 @@
+<section class="p-3">
+  <h3 class="bd-highlight text-center mb-3 fw-bold">REPORTE DE VENTAS</h3>
+  <mat-divider></mat-divider>
+  <section class="row my-3">
+    <!-- <mat-form-field class="col-4 col-lg-2" appearance="outline">
+      <mat-label>Número</mat-label>
+      <input matInput [(ngModel)]="numeroBusqueda" />
+    </mat-form-field> -->
+    <div class="col-4 col-lg-3" appearance="outline">
+      <app-select-cliente (event)="eventCliente($event)"></app-select-cliente>
+    </div>
+
+    <div class="col-4 col-lg-2" appearance="outline">
+      <app-select-forma-pago (event)="eventFormaDePago($event)">
+      </app-select-forma-pago>
+    </div>
+
+    <div class="col-4 col-lg-3" appearance="outline">
+      <app-select-usuario (event)="eventUsuario($event)"></app-select-usuario>
+    </div>
+
+    <mat-form-field class="col-4 col-lg-2" appearance="outline">
+      <mat-label>Fecha Inicio</mat-label>
+      <input matInput [matDatepicker]="pickerInicio" [(ngModel)]="desde" />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerInicio"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col-4 col-lg-2" appearance="outline">
+      <mat-label>Fecha Fin</mat-label>
+      <input matInput [matDatepicker]="pickerFin" [(ngModel)]="hasta" />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerFin"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <div class="col-4 col-lg-2">
+      <button
+        mat-fab
+        extended
+        class="w-100 text-white bg-primary"
+        (click)="GetReporte()"
+      >
+        <mat-icon>search</mat-icon>
+        Buscar
+      </button>
+    </div>
+
+    <div class="col">
+      <section class="d-flex gap-3">
+        <button mat-fab extended color="primary" (click)="Limpiarfiltro()">
+          <i class="bi bi-trash fs-6"></i>
+          Limpiar Filtros
+        </button>
+
+        <button
+          mat-fab
+          extended
+          style="background-color: #1d6f42; color: white"
+          (click)="exportarExcel()"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-file-earmark-spreadsheet fs-5 me-1"></i>
+            <span>Exportar Excel</span>
+          </div>
+        </button>
+
+        <button
+          mat-fab
+          extended
+          style="background-color: #b61a1a; color: white"
+          (click)="exportarPDF()"
+        >
+          <div class="d-flex align-items-center">
+            <i class="bi bi-file-pdf-fill fs-5 me-1"></i>
+            <span>Exportar PDF</span>
+          </div>
+        </button>
+      </section>
+    </div>
+  </section>
+
+  <div class="table-responsive">
+    @if(isLoading()){
+    <app-loader></app-loader>
+    } @else {
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef>Numero</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let element">{{ element.cliente }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaRegistro">
+        <th mat-header-cell *matHeaderCellDef>Fecha Registro</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fechaRegistro | date : "dd/MM/yyyy" }}
+        </td>
+        <td mat-footer-cell *matFooterCellDef class="fw-bold">Total</td>
+      </ng-container>
+
+      <ng-container matColumnDef="formapago">
+        <th mat-header-cell *matHeaderCellDef>Forma De Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.formaDePago }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef class="text-end">Total</th>
+        <td mat-cell *matCellDef="let element" class="text-end">
+          {{ element.total | currency : "S/ " : "symbol" : "1.2-2" }}
+        </td>
+        <td mat-footer-cell *matFooterCellDef class="text-end fw-bold">
+          {{ total() | currency : "S/ " : "symbol" : "1.2-2" }}
+        </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="registradopor">
+        <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+        <td mat-cell *matCellDef="let element">{{ element.registradoPor }}</td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    }
+  </div>
+</section>
