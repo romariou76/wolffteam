@@ -21,7 +21,7 @@
           (click)="toggleOption('asistencia')"
           id="asistencia"
         >
-          <span class="icon"><i class="bi bi-door-open"></i></span>
+          <span class="icon">🚪</span>
           <span class="text">Ingresos</span>
         </a>
       </li>
@@ -32,10 +32,49 @@
           (click)="toggleOption('inscripciones')"
           id="inscripciones"
         >
-          <span class="icon"><i class="bi bi-clipboard2-plus"></i></span>
+          <span class="icon">📝</span>
           <span class="text">Inscripciones</span>
         </a>
       </li>
+
+      <li class="nav-item nav-item-has-children">
+        <a
+          [ngClass]="{ 'collapsed': clase() !== 'paseentrada' }"
+          (click)="toggleOption('paseentrada')"
+          id="paseentrada"
+        >
+          <span class="icon">🎟️</span>
+          <span class="text">Pase Entradas</span>
+        </a>
+      </li>
+
+      <!-- <li class="nav-item nav-item-has-children">
+        <a
+          class="collapsed"
+          data-bs-toggle="collapse"
+          data-bs-target="#ddmenu_pase"
+          aria-controls="ddmenu_pase"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          (click)="toggleOption('ddmenu_pase')"
+        >
+          <span class="icon">
+            🎟️
+          </span>
+          <span class="text">Pases</span>
+          <i class="icon-li bi bi-chevron-right"></i>
+        </a>
+        <ul id="ddmenu_pase" class="collapse dropdown-nav">
+          <li>
+            <a (click)="toggleOption('paseentrada')"> Pases </a>
+          </li> -->
+          <!-- <li>
+            <a (click)="toggleOption('entradas')">
+              Historial Pases
+            </a>
+          </li> -->
+        <!-- </ul>
+      </li> -->
 
 
       <li class="nav-item nav-item-has-children">
@@ -45,7 +84,7 @@
           id="ventas"
         >
           <span class="icon">
-            <i class="bi bi-cart2"></i>
+            🛒
           </span>
           <span class="text">Ventas</span>
         </a>
@@ -58,7 +97,7 @@
           id="clientes"
         >
           <span class="icon">
-            <i class="bi bi-people"></i>
+            👥
           </span>
           <span class="text">Clientes</span>
         </a>
@@ -71,7 +110,7 @@
           id="planes"
         >
           <span class="icon">
-            <i class="bi bi-bookmark-star"></i>
+            📋
           </span>
           <span class="text">Planes</span>
         </a>
@@ -85,7 +124,7 @@
           id="productos"
         >
           <span class="icon">
-            <i class="bi bi-box-seam"></i>
+            📦
           </span>
           <span class="text">Productos</span>
         </a>
@@ -98,7 +137,7 @@
           id="pagos"
         >
           <span class="icon">
-            <i class="bi bi-cash-coin"></i>
+            💳
           </span>
           <span class="text">Pagos</span>
         </a>
@@ -113,7 +152,7 @@
         id="usuarios"
           >
           <span class="icon">
-            <i class="bi bi-person-vcard"></i>
+            👤
           </span>
           <span class="text">Usuarios</span>
         </a>
@@ -136,7 +175,7 @@
           (click)="toggleOption('ddmenu_55')"
         >
           <span class="icon">
-            <i class="bi bi-people"></i>
+            ⚙️
           </span>
           <span class="text">Configuración</span>
           <i class="icon-li bi bi-chevron-right"></i>
@@ -156,6 +195,9 @@
           <li>
             <a (click)="clickOpenPrecioIngreso()"> Precio Ingreso </a>
           </li>
+            <li>
+            <a (click)="clickOpenPrecioEntrada()"> Precio Entrada </a>
+          </li>
         </ul>
       </li>
 
@@ -172,7 +214,7 @@
           (click)="toggleOption('ddmenu_personal')"
         >
           <span class="icon">
-            <i class="bi bi-receipt"></i>
+            📊
           </span>
           <span class="text"> Dashboards </span>
           <i class="icon-li bi bi-chevron-right"></i>
@@ -199,7 +241,7 @@
           (click)="toggleOption('ddmenu_reportes')"
         >
           <span class="icon">
-            <i class="bi bi-receipt"></i>
+            📑
           </span>
           <span class="text">Reportes </span>
           <i class="icon-li bi bi-chevron-right"></i>
@@ -231,7 +273,7 @@
           aria-label="Toggle navigation"
         >
           <span class="icon">
-            <i class="bi bi-box-arrow-right"></i>
+            🚪
           </span>
           <span class="text">Cerrar Sesion</span>
         </a>
@@ -248,9 +290,10 @@
           aria-label="Toggle navigation"
         >
           <span class="icon">
-            <i class="bi bi-info-circle"></i>
+            ℹ️
           </span>
           <span class="text"> Información </span>
+
           <i class="icon-li bi bi-chevron-right"></i>
         </a>
         <ul id="ddmenu_5" class="collapse dropdown-nav">

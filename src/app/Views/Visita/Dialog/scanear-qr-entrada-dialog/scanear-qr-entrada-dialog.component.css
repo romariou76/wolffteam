@@ -1,0 +1,49 @@
+.scanner-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.btn-cerrar {
+  position: absolute;
+  top: 14px;
+  right: 8px;
+  background-color: rgb(221, 219, 216);
+  z-index: 10;
+}
+
+.tapa {
+  display: none; /* oculta totalmente */
+}
+
+.tapa2 {
+  display: block; /* oculta totalmente */
+}
+
+.content{
+  height: 370px;
+}
+
+@media (max-width: 768px) {
+  .content {
+    height: 280px;
+  }
+}
+
+
+.scanner-container {
+  width: 100%;
+}
+
+.scanner-container ngx-scanner-qrcode video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+/* @media (max-width: 768px) {
+  .scanner-container {
+    width: 300px;
+    height: 400px;
+  }
+} */

@@ -9,6 +9,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { SetPrecioIngresoDialogComponent } from '../../Views/Maestros/PrecioIngreso/Dialog/set-precio-ingreso-dialog/set-precio-ingreso-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { SetPrecioEntradaDialogComponent } from '../../Views/Maestros/PrecioEntrada/Dialog/set-precio-entrada-dialog/set-precio-entrada-dialog.component';
 @Component({
   selector: 'app-sidebar',
   imports: [
@@ -46,6 +47,21 @@ export class SidebarComponent {
 
   clickOpenPrecioIngreso(){
     let dial = this.dialog.open(SetPrecioIngresoDialogComponent, {
+      width: '100%',
+      maxWidth: '500px',
+      // disableClose: true
+    });
+
+    dial.afterClosed().subscribe(async (resp) => {
+      // this.openAddDialog.set(0)
+      if (resp) {
+        // this.GetData();
+      }
+    });
+  }
+
+  clickOpenPrecioEntrada(){
+    let dial = this.dialog.open(SetPrecioEntradaDialogComponent, {
       width: '100%',
       maxWidth: '500px',
       // disableClose: true

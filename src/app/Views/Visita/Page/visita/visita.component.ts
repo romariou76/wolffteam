@@ -28,6 +28,7 @@ import { AddVisitaClienteDialogComponent } from '../../Dialog/add-visita-cliente
 import { Visita } from '../../../../Interfaces/Gestion/Visita';
 import { GetApiService } from '../../../../Services/get-api.service';
 import { ViewDetalleVisitaDialogComponent } from '../../Dialog/view-detalle-visita-dialog/view-detalle-visita-dialog.component';
+import { ScanearQrEntradaDialogComponent } from '../../Dialog/scanear-qr-entrada-dialog/scanear-qr-entrada-dialog.component';
 
 
 
@@ -196,10 +197,27 @@ async GetData() {
     });
 
     dial.afterClosed().subscribe(async (resp) => {
+    });
+  }
 
+  clickIngresoQr() {
+    this.openAddDialog.set(1)
+    let dial = this.dialog.open(ScanearQrEntradaDialogComponent, {
+      width: '90%',
+      maxWidth: '500px',
+      disableClose: true
     });
 
+    dial.afterClosed().subscribe(async (resp) => {
+      this.openAddDialog.set(0)
+      if (resp) {
+        this.GetData();
+
+      }
+    });
   }
+
+// ----------
 
   ngOnInit() {
     this.GetData()

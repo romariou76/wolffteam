@@ -11,6 +11,14 @@
 
     <div class="ms-3 mb-3">
 
+      <button type="button" mat-fab extended (click)="clickIngresoQr()"
+        class="text-white me-2" style="background-color: #00796b !important;"
+        matTooltip="Registrar ingreso mediante código QR">
+        <mat-icon>qr_code_scanner</mat-icon>
+        Ingreso por QR
+      </button>
+
+
       <button type="button" mat-fab extended (click)="clickAdd()" class=" text-white me-2"  style="background-color: #1f9225 !important;"
       matTooltip="Registrar ingreso de clientes inscritos">
         <mat-icon>add</mat-icon>

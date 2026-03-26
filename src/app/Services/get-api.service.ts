@@ -17,6 +17,9 @@ import { DetalleVenta, Venta } from '../Interfaces/Gestion/Venta';
 import { Visita } from '../Interfaces/Gestion/Visita';
 import { PrecioIngreso, PrecioIngresoPost } from '../Interfaces/Gestion/PrecioIngreso';
 import { DashboardTotalVentasDTO, TopProductosVendidos } from '../Interfaces/Dashboard/TopProductosVendidos';
+import { Pase } from '../Interfaces/PaseEntrada/PaseEntrada';
+import { Entrada } from '../Interfaces/PaseEntrada/Entrada';
+import { PrecioEntrada } from '../Interfaces/Gestion/PrecioEntrada';
 
 
 @Injectable({
@@ -133,6 +136,19 @@ export class GetApiService {
     return firstValueFrom(this.http.get<Suscripcion[]>(url, { headers }));
   }
 
+
+  GetPaseEntrada() {
+    let headers = this.Headers();
+    let url = this.url + 'PaseEntrada';
+    return firstValueFrom(this.http.get<Pase[]>(url, { headers }));
+  }
+
+  GetEntrada() {
+    let headers = this.Headers();
+    let url = this.url + 'Entrada/GetAllEntrada';
+    return firstValueFrom(this.http.get<Entrada[]>(url, { headers }));
+  }
+
   getClienteByDocumento(documento: string) {
     let headers = this.Headers()
     let url = this.url + 'Cliente/documento/' + documento
@@ -175,6 +191,12 @@ export class GetApiService {
     return firstValueFrom(this.http.get<DetalleVenta[]>(url, { headers }));
   }
 
+  getEntradasByIdPase(id: number) {
+    let headers = this.Headers();
+    let url = this.url + 'Entrada/idPase?id=' + id;
+    return firstValueFrom(this.http.get<Entrada[]>(url, { headers }));
+  }
+
   GetProducto() {
     let headers = this.Headers();
     let url = this.url + 'Producto';
@@ -205,7 +227,10 @@ export class GetApiService {
     return firstValueFrom(this.http.get<PrecioIngreso>(url, { headers }));
   }
 
-
-
+ getPrecioEntrada() {
+    let headers = this.Headers();
+    let url = this.url + 'PrecioEntrada';
+    return firstValueFrom(this.http.get<PrecioEntrada>(url, { headers }));
+  }
 
 }

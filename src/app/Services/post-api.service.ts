@@ -17,6 +17,8 @@ import { ReporteVenta, ReporteVentaBusqueda, Venta, VentaDetalles, VentaPost } f
 import { Visita, VisitaPost } from '../Interfaces/Gestion/Visita';
 import { PrecioIngreso, PrecioIngresoPost } from '../Interfaces/Gestion/PrecioIngreso';
 import { TopProductosVendidos } from '../Interfaces/Dashboard/TopProductosVendidos';
+import { PaseEntradaRequest } from '../Interfaces/PaseEntrada/PaseEntrada';
+import { PrecioEntrada, PrecioEntradaPost } from '../Interfaces/Gestion/PrecioEntrada';
 
 @Injectable({
   providedIn: 'root'
@@ -136,16 +138,25 @@ export class PostApiService {
     return this.http.post<PrecioIngreso>(url, object, { headers });
   }
 
+  postPrecioEntrada(object: PrecioEntradaPost) {
+    let headers = this.Headers();
+    let url = this.url + 'PrecioEntrada';
+    return this.http.post<PrecioEntrada>(url, object, { headers });
+  }
+
+  postPaseEntrada(object: PaseEntradaRequest) {
+    let headers = this.Headers();
+    let url = this.url + 'PaseEntrada';
+    return this.http.post<PaseEntradaRequest>(url, object, { headers });
+  }
 
 
+postUsarEntrada(idPase: number, idCliente: number, idUsuario: number) {
+  const headers = this.Headers();
+  const url = `${this.url}Entrada/usar?idPase=${idPase}&idCliente=${idCliente}&idUsuario=${idUsuario}`;
 
-
-
-
-
-
-
-
+  return this.http.post(url, {}, { headers, responseType: 'text' });
+}
 
 
   postGetPagoByTipoMovimiento(obj: PagoMovimientoBusqueda) {

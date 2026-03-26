@@ -1,0 +1,66 @@
+<div mat-dialog-content>
+  <div class="scanner-wrapper">
+    <button
+      mat-icon-button
+      color="warn"
+      mat-dialog-close
+      aria-label="Cerrar"
+      class="btn-cerrar"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="row overflow-hidden content">
+      @if (showScanner) {
+      <div
+        [ngClass]="showScannerContent ? 'tapa2' : 'tapa'"
+        class="scanner-container"
+      >
+        <ngx-scanner-qrcode
+          #scanner
+          [config]="{ constraints: { video: { facingMode: 'environment' } } }"
+          (event)="onScanSuccess($event)"
+        >
+        </ngx-scanner-qrcode>
+      </div>
+      } @else {
+        <app-loader></app-loader>
+      }
+
+      <h6 class="text-center">Enfoca el código QR dentro del recuadro</h6>
+
+
+   <div class="d-flex gap-3">
+      <!-- <button
+        class="btn btn-primary w-100"
+        [disabled]="!canStartScan"
+        (click)="startScan()"
+      >
+        Encender Cámara
+      </button> -->
+      <!-- <button class="btn btn-danger" (click)="stopScan()">Detener cámara</button> -->
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button  type="submit">
+        Registrar
+      </button>
+    </div>
+  </mat-dialog-actions> -->

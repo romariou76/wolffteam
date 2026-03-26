@@ -1,0 +1,169 @@
+<div class="p-3">
+  <h3 class="bd-highlight text-center mb-3">HISTORIAL DE ENTRADAS</h3>
+  <mat-divider></mat-divider>
+  <section class="row row-cols-1 row-cols-md-2 row-cols-lg-6 g-3 mt-3">
+
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerInicio"
+          [(ngModel)]="fechaDesde"
+          [readonly]="!habilitarFiltroFecha"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerInicio"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerFin"
+          [(ngModel)]="fechaHasta"
+          [readonly]="!habilitarFiltroFecha"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerFin"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <section class="d-flex gap-3">
+    <div>
+      <button mat-fab extended color="primary">
+        <i class="bi bi-trash fs-6"></i>
+        Limpiar Filtros
+      </button>
+    </div>
+
+    <!-- <div>
+      <button mat-fab extended class="w-100" >
+        <mat-icon>search</mat-icon>
+        Buscar
+      </button>
+    </div> -->
+
+    <div>
+      <!-- <button
+        mat-fab
+        extended
+        style="background-color: #1d6f42; color: white"
+        (click)="exportarExcel()"
+      >
+        <div class="d-flex align-items-center">
+          <i class="bi bi-file-earmark-spreadsheet fs-5 me-1"></i>
+          <span>Exportar Excel</span>
+        </div>
+      </button> -->
+    </div>
+
+    <div>
+      <!-- <button
+        mat-fab
+        extended
+        style="background-color: #b61a1a; color: white"
+        (click)="exportarPDF()"
+      >
+        <div class="d-flex align-items-center">
+          <i class="bi bi-file-pdf-fill fs-5 me-1"></i>
+          <span>Exportar PDF</span>
+        </div>
+      </button> -->
+    </div>
+  </section>
+</div>
+
+<section class="p-3">
+  <div class="table-responsive">
+
+    @if(isLoading()){
+      <app-loader></app-loader>
+    }@else {
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+    >
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>N°</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="cliente">
+        <th mat-header-cell *matHeaderCellDef>Cliente</th>
+        <td mat-cell *matCellDef="let element">{{ element.cliente }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef>Tipo Pago</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.tipoMovimientoAsociado }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaPago">
+        <th mat-header-cell *matHeaderCellDef>Fecha Pago</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fechaPago | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="monto">
+        <th mat-header-cell *matHeaderCellDef>Monto</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.monto | currency : "S/ " : "symbol" : "1.2-2" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="formaDePago">
+        <th mat-header-cell *matHeaderCellDef>Forma De Pago</th>
+        <td mat-cell *matCellDef="let element">{{ element.formaDePago }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="registradoPor">
+        <th mat-header-cell *matHeaderCellDef>Registrado Por</th>
+        <td mat-cell *matCellDef="let element">{{ element.registradoPor }}</td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="Acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-mini-fab
+          matTooltip="Editar"
+          (click)="clickViewDetalles(element)"
+          class="me-1"
+          style="color: white; background-color: rgb(0, 110, 255)"
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
+      </td>
+    </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[15, 30, 45]"
+      showFirstLastButtons
+    ></mat-paginator>
+    }
+
+  </div>
+</section>

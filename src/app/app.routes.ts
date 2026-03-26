@@ -22,6 +22,8 @@ import { ReporteInscripcionesComponent } from './Views/Reportes/ReporteInscripci
 import { ReporteVentasComponent } from './Views/Reportes/ReporteVentas/Page/reporte-ventas/reporte-ventas.component';
 import { DashboardVentasComponent } from './Views/Dashboard/Ventas/Page/dashboard-ventas/dashboard-ventas.component';
 import { DashboardInscripcionesComponent } from './Views/Dashboard/Inscripciones/Page/dashboard-inscripciones/dashboard-inscripciones.component';
+import { PaseEntradaComponent } from './Views/PaseEntrada/Page/pase-entrada/pase-entrada.component';
+import { EntradasComponent } from './Views/Entradas/Page/entradas/entradas.component';
 
 export const routes: Routes = [
 
@@ -52,6 +54,8 @@ export const routes: Routes = [
       { path: 'productos', component: ProductosComponent },
       { path: 'planes', component: PlanComponent },
       { path: 'inscripciones', component: SuscripcionComponent },
+      { path: 'paseentrada', component: PaseEntradaComponent },
+      { path: 'entradas', component: EntradasComponent },
       { path: 'pagos', component: PagosComponent },
 
       { path: 'reporte/pagos', component: ReportePagosComponent },

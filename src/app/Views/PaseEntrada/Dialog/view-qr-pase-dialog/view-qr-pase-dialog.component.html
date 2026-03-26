@@ -1,0 +1,28 @@
+
+  <!-- <h1 mat-dialog-title class="sub-header-title">QR </h1> -->
+<div mat-dialog-content >
+  <div class="d-flex justify-content-center ">
+    <img src="imgs/logo.png" #logoImg  width="200" alt="logo" />
+  </div>
+  <div>
+    <qrcode
+        (qrCodeURL)="onChangeURL($event)"
+        [qrdata]="myAngularxQrCode"
+        [width]="350"
+        [errorCorrectionLevel]="'M'">
+      </qrcode>
+      <h5 class="text-center">{{pase.cliente}}</h5>
+    </div>
+
+</div>
+
+<mat-dialog-actions class="d-flex position-relative justify-content-center">
+  <div class="position-absolute top-50 translate-middle-y mb-3">
+
+    <a [href]="qrCodeDownloadLink" mat-flat-button  style="background: #0388fc;" download="qrcode">
+      Descargar
+      <mat-icon>download</mat-icon>
+    </a>
+    <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+  </div>
+</mat-dialog-actions>

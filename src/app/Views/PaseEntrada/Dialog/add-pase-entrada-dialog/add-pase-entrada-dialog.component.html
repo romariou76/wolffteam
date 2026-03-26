@@ -1,0 +1,81 @@
+<h1 mat-dialog-title class="fw-bold">Registrar Pase</h1>
+<div  mat-dialog-content>
+  <div >
+    <div class="row">
+
+      <mat-form-field class="col-6">
+        <mat-label>Fecha de Registro</mat-label>
+        <input
+          matInput
+          [matDatepicker]="registroPicker"
+          [(ngModel)]="fechaRegistro"
+          id="fechaRegistro"
+          (keydown.enter)="moveFocus('selectcliente')"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="registroPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #registroPicker></mat-datepicker>
+      </mat-form-field>
+
+      <div class="col-6">
+        <app-select-cliente
+          (event)="eventCliente($event)"
+          (keydown.enter)="moveFocus('selectformapago')"
+        ></app-select-cliente>
+      </div>
+
+        <div class="col-6">
+        <app-select-forma-pago
+          (event)="eventFormaPago($event)"
+          (keydown.enter)="quitarFocus()"
+        ></app-select-forma-pago>
+      </div>
+
+     <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Cantidad de entradas</mat-label>
+        <mat-select [(value)]="cantidadEntradas" (selectionChange)="selectCantidad($event.value)">
+          <mat-option *ngFor="let num of numeros" [value]="num">
+            {{ num }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"  class="col-6">
+        <mat-label>Otra cantidad</mat-label>
+        <input matInput type="number"
+              [(ngModel)]="cantidadEntradas"
+              (input)="generarEntradas()"
+              />
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline"  class="col-6">
+        <mat-label>Total S/ </mat-label>
+        <input matInput type="number"
+              [(ngModel)]="total" />
+      </mat-form-field>
+
+    </div>
+  </div>
+
+
+</div>
+
+  <mat-dialog-actions class="position-relative">
+    <div class="position-absolute top-50 end-0 translate-middle-y me-3">
+      <button mat-flat-button mat-dialog-close style="background: #6c757d;">Cerrar</button>
+      <button mat-flat-button
+            [disabled]="!isFormValid()"
+      (click)="clicEnviar()"
+      >
+        Aceptar
+      </button>
+      <!-- <button mat-flat-button
+      (click)="generarEntradas()"
+      >
+        Aceptar
+      </button> -->
+    </div>
+  </mat-dialog-actions>
